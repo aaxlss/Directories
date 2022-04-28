@@ -2,6 +2,10 @@
 
 namespace Model;
 
+
+/**
+ * Design Class
+ */
 class Design {
   
     private $id;
