@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "classmap": [
+            "Model/"
+        ],
+        "psr-4": {
+            "Model\\": "Model/"
+        }
+    }
+}
