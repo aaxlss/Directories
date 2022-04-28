@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 class Connection {
 
     private $host;

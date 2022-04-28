@@ -16,14 +16,15 @@
     //PDO query getting tv series by title
     $tvSeriesByTitle = $connection->getInfo('SELECT  * FROM tv_series tv INNER JOIN tv_series_intervals tsi ON tv.id = tsi.id_tv_series WHERE tv.title LIKE \'%3%\'')->fetchAll();
 
-    $nextSerie = 0;
+    $nextSerie = '';//this will store the next closest series according to the current time
     foreach($tvSeriesIntervals as $tvSerieInterval){
+        //Creating object to get tv series interval
         $tvSerieIntervalObj = new TvSerieInterval($tvSerieInterval->id, $tvSerieInterval->title, $tvSerieInterval->channel, $tvSerieInterval->gender, $tvSerieInterval->week_day, $tvSerieInterval->show_time);
-        
+        //if the currect time is less that the time from the tv serie show
         if ( time() < strtotime($tvSerieIntervalObj->getShowTime()) ){
-            if($nextSerie === 0) {
+            if($nextSerie === 0) {//if is the firs series to validate will be assigned to to nextSerie available;
                 $nextSerie = $tvSerieIntervalObj;
-            } else if( strtotime($nextSerie->getShowTime()) >  strtotime($tvSerieIntervalObj->getShowTime())){
+            } else if( strtotime($nextSerie->getShowTime()) >  strtotime($tvSerieIntervalObj->getShowTime())){//if the store serie is greater than the current selected serie, this will get replace by closer one
                 $nextSerie = $tvSerieIntervalObj;
             }
         }
