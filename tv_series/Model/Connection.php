@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use PDO;
+
 class Connection {
 
     private $host;
